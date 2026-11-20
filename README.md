@@ -30,15 +30,13 @@ public/
 src/
   index.js          entry point
   App.jsx           page sections
-  data.js           ALL text, projects, tools and annotations
+  data.js           ALL text, projects and tools
   components/       UI components
   styles.css        theme and layout
 ```
 
 ## Editing content
-All text, projects, specs, tools and image annotations are in `src/data.js`.
+All text, projects, specs and tools are in `src/data.js`.
 
 - Images go in `public/projects/<project>/`.
-- Annotation markers: `hotspots: [{ x, y, label, note }]` where `x`/`y` are
-  percentages of the image width/height.
 - Deep link to a project: `https://your-site/#project-<id>`.

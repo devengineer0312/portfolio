@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react'
-import AnnotatedImage from './AnnotatedImage.jsx'
 import { asset } from '../asset.js'
 
 export default function ProjectModal({ project, index, startImage = 0, onClose }) {
   const [current, setCurrent] = useState(startImage)
-  const [annotate, setAnnotate] = useState(true)
   const image = project.gallery[current]
+  const count = project.gallery.length
+  const step = (d) => setCurrent((c) => (c + d + count) % count)
 
   useEffect(() => {
     const onKey = (e) => {
       if (e.key === 'Escape') onClose()
-      if (e.key === 'ArrowRight') setCurrent((c) => (c + 1) % project.gallery.length)
-      if (e.key === 'ArrowLeft') setCurrent((c) => (c - 1 + project.gallery.length) % project.gallery.length)
+      if (e.key === 'ArrowRight') setCurrent((c) => (c + 1) % count)
+      if (e.key === 'ArrowLeft') setCurrent((c) => (c - 1 + count) % count)
     }
     document.addEventListener('keydown', onKey)
     document.body.style.overflow = 'hidden'
@@ -19,7 +19,7 @@ export default function ProjectModal({ project, index, startImage = 0, onClose }
       document.removeEventListener('keydown', onKey)
       document.body.style.overflow = ''
     }
-  }, [onClose, project.gallery.length])
+  }, [onClose, count])
 
   return (
     <div className="modal-backdrop" onClick={onClose}>
@@ -39,7 +39,27 @@ export default function ProjectModal({ project, index, startImage = 0, onClose }
 
         <div className="modal-body">
           <section className="modal-media">
-            <AnnotatedImage key={image.src} image={image} showAnnotations={annotate} />
+            <figure className="viewer">
+              <div className="viewer-frame">
+                <img key={image.src} src={asset(image.src)} alt={image.caption} />
+                {count > 1 && (
+                  <>
+                    <button className="viewer-nav prev" onClick={() => step(-1)} aria-label="Previous photo">
+                      ‹
+                    </button>
+                    <button className="viewer-nav next" onClick={() => step(1)} aria-label="Next photo">
+                      ›
+                    </button>
+                  </>
+                )}
+                <span className="viewer-count mono">
+                  {current + 1} / {count}
+                </span>
+              </div>
+              <figcaption>
+                <span className="mono">FIG.</span> {image.caption}
+              </figcaption>
+            </figure>
             <div className="media-bar">
               <div className="thumbs">
                 {project.gallery.map((g, i) => (
@@ -50,17 +70,9 @@ export default function ProjectModal({ project, index, startImage = 0, onClose }
                     aria-label={g.caption}
                   >
                     <img src={asset(g.src)} alt="" loading="lazy" />
-                    {g.hotspots && <span className="thumb-tag mono">ANN</span>}
                   </button>
                 ))}
               </div>
-              {image.hotspots && (
-                <label className="toggle mono">
-                  <input type="checkbox" checked={annotate} onChange={(e) => setAnnotate(e.target.checked)} />
-                  <span className="toggle-track" />
-                  Annotations
-                </label>
-              )}
             </div>
           </section>
 

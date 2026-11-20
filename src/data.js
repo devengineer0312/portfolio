@@ -1,6 +1,6 @@
 // ─────────────────────────────────────────────────────────────
 //  All portfolio content lives here. Edit this file to update
-//  text, projects, links and annotations — no component changes
+//  text, projects, links and images — no component changes
 //  needed.
 // ─────────────────────────────────────────────────────────────
 
@@ -81,7 +81,6 @@ export const stats = [
   { value: 'FCC · CE · Anatel', unit: '', label: 'EMI/EMC compliance achieved' },
 ]
 
-// Annotation hotspots use percentage coordinates (x, y) on the image.
 export const projects = [
   {
     id: 'multi-radio-iot',
@@ -113,16 +112,6 @@ export const projects = [
       {
         src: '/projects/iot-tracker/1.jpg',
         caption: '3D render — top side component placement',
-        hotspots: [
-          { x: 51, y: 49, label: 'STM32 host MCU', note: 'Central placement shortens SPI/UART runs to all three radios.' },
-          { x: 76, y: 43, label: 'LTE-M / NB-IoT module', note: 'Cellular modem with dedicated U.FL feed (A3).' },
-          { x: 24, y: 46, label: 'LoRa module', note: 'Sub-GHz transceiver fed to U.FL A1 on the opposite edge from the modem.' },
-          { x: 52, y: 29, label: 'BLE SoC + crystal', note: 'Short RF path up to antenna port A2; 32 MHz / 32 kHz crystals placed tight to the SoC.' },
-          { x: 51, y: 82, label: 'Nano-SIM holder', note: 'Placed next to the modem section, ESD-protected.' },
-          { x: 35, y: 83, label: 'SPI NOR flash', note: 'Local buffering of readings when connectivity drops.' },
-          { x: 70, y: 14, label: 'USB header', note: 'Power and data for lab use.' },
-          { x: 25, y: 17, label: 'UART debug header', note: '3.3 V console for firmware bring-up.' },
-        ],
       },
       { src: '/projects/iot-tracker/2.jpg', caption: 'Assembled prototype — top side' },
       { src: '/projects/iot-tracker/3.jpg', caption: 'Layout — copper pours, RF sections and fan-out (all layers)' },
@@ -162,18 +151,6 @@ export const projects = [
       {
         src: '/projects/am625/3d-top.jpg',
         caption: '3D render — carrier board with AM625 SoM mounted',
-        hotspots: [
-          { x: 52, y: 44, label: 'AM625 SoM (10-layer)', note: 'Processor, LPDDR and PMIC on a castellated module.' },
-          { x: 28, y: 12, label: 'HDMI output', note: 'Driven from the LVDS→RGB bridge and HDMI transmitter.' },
-          { x: 42, y: 24, label: 'SN75LVDS82 bridge', note: 'LVDS receiver converting to parallel RGB.' },
-          { x: 61, y: 79, label: 'GbE port 1', note: 'RTL8211F PHY over RGMII, 100 Ω MDI pairs.' },
-          { x: 82, y: 79, label: 'GbE port 2', note: 'Second independent Gigabit interface.' },
-          { x: 75, y: 15, label: 'Audio jack', note: 'TLV320AIC3106 codec input/output.' },
-          { x: 36, y: 85, label: 'USB 2.0 Type-A', note: 'Host port, 90 Ω differential pair.' },
-          { x: 19, y: 89, label: 'USB-C power input', note: 'Input protection ahead of the DC-DC converter.' },
-          { x: 26, y: 70, label: 'DC-DC stage', note: 'TLV62595 buck with shielded inductor.' },
-          { x: 51, y: 10, label: 'Expansion headers', note: 'UART / SPI / I²C / CAN and boot straps.' },
-        ],
       },
       { src: '/projects/am625/block-diagram.jpg', caption: 'System block diagram' },
       { src: '/projects/am625/layout.jpg', caption: 'Top-layer routing with ground pours and fan-out' },
@@ -207,13 +184,6 @@ export const projects = [
       {
         src: '/projects/industrial/2.jpg',
         caption: 'Assembled batch — all board variants',
-        hotspots: [
-          { x: 47, y: 61, label: 'Controller board', note: 'Wi-Fi MCU module with 16-bit ADC front-end.' },
-          { x: 51, y: 53, label: 'Dual buck regulators', note: '12 V and 5 V rails from a 19 V barrel input.' },
-          { x: 34, y: 40, label: 'Power / driver board', note: 'Linear and switching stages, TO-220 devices.' },
-          { x: 17, y: 42, label: 'Connector-matrix board', note: 'Distribution of I/O to field wiring.' },
-          { x: 64, y: 24, label: 'Ring sensor boards', note: 'Custom outline around a central aperture.' },
-        ],
       },
       { src: '/projects/industrial/1.jpg', caption: 'Bench view — batch after assembly' },
       { src: '/projects/industrial/3.jpg', caption: 'Board variants laid out for inspection' },

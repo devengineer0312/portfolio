@@ -206,7 +206,7 @@ function Projects({ onOpen }) {
         <SectionHead
           index="02"
           title="Project Albums"
-          kicker="Click any photo to open the album — annotated renders, layout views, specifications and design decisions."
+          kicker="Click any photo to open the album — renders, layout views, specifications and design decisions."
         />
         <Album projects={projects} onOpen={onOpen} />
       </div>

@@ -37,14 +37,12 @@ export default function Album({ projects, onOpen }) {
           const [cover, ...rest] = p.gallery
           const side = rest.slice(0, 2)
           const more = p.gallery.length - 1 - side.length
-          const notes = p.gallery.reduce((n, g) => n + (g.hotspots?.length || 0), 0)
           return (
             <article key={p.id} className="album">
               <div className="album-mosaic">
                 <button className="album-photo album-cover" onClick={() => onOpen(i, 0)} aria-label={`${p.title}: ${cover.caption}`}>
                   <img src={asset(cover.src)} alt="" loading="lazy" />
                   <span className="cover-tag mono">PRJ-{String(i + 1).padStart(2, '0')}</span>
-                  {notes > 0 && <span className="album-ann mono">{notes} annotations</span>}
                 </button>
                 {side.length > 0 && (
                   <div className="album-side">
