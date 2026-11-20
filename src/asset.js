@@ -1,2 +1,3 @@
 // Resolves files in /public so the site works from any hosting sub-path.
-export const asset = (path) => import.meta.env.BASE_URL + path.replace(/^\//, '')
+// PUBLIC_URL comes from "homepage" in package.json ("." = relative paths).
+export const asset = (path) => `${process.env.PUBLIC_URL || ''}/${path.replace(/^\//, '')}`

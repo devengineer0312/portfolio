@@ -67,7 +67,7 @@ export default function ProjectModal({ project, index, onClose }) {
           <aside className="modal-info">
             <p className="lead">{project.summary}</p>
 
-            <h3 className="section-label mono">// Specifications</h3>
+            <h3 className="section-label mono">{'// Specifications'}</h3>
             <table className="spec-table">
               <tbody>
                 {project.specs.map(([k, v]) => (
@@ -79,7 +79,7 @@ export default function ProjectModal({ project, index, onClose }) {
               </tbody>
             </table>
 
-            <h3 className="section-label mono">// Design decisions</h3>
+            <h3 className="section-label mono">{'// Design decisions'}</h3>
             <ul className="check-list">
               {project.highlights.map((h) => (
                 <li key={h}>{h}</li>

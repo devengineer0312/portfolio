@@ -181,7 +181,7 @@ function About() {
           </div>
         </div>
 
-        <h3 className="section-label mono expertise-label">// Core engineering expertise</h3>
+        <h3 className="section-label mono expertise-label">{'// Core engineering expertise'}</h3>
         <div className="expertise-grid">
           {expertise.map((g) => (
             <div className="card cap" key={g.title}>
@@ -292,7 +292,7 @@ function Skills() {
       <div className="container">
         <SectionHead index="04" title="Tools & Skills" kicker="The tool-chain from concept to certified product." />
         <Tools groups={tools} />
-        <h3 className="section-label mono skills-label">// Full skill set</h3>
+        <h3 className="section-label mono skills-label">{'// Full skill set'}</h3>
         <div className="skill-grid">
           {skills.map((s) => (
             <div className="card skill" key={s.group}>
@@ -377,11 +377,11 @@ export default function App() {
     return () => window.removeEventListener('hashchange', onHash)
   }, [])
   const open = useCallback((i) => {
-    history.replaceState(null, '', `#project-${projects[i].id}`)
+    window.history.replaceState(null, '', `#project-${projects[i].id}`)
     setOpenIndex(i)
   }, [])
   const close = useCallback(() => {
-    history.replaceState(null, '', '#projects')
+    window.history.replaceState(null, '', '#projects')
     setOpenIndex(null)
   }, [])
 

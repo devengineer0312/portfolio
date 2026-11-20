@@ -1,23 +1,42 @@
 # Hardware Engineering Portfolio
 
-React + Vite single-page portfolio.
+React single-page portfolio (Create React App / `react-scripts`).
 
 ## Run locally
 Requires Node.js 18+ (https://nodejs.org, LTS).
 
 ```
 npm install
-npm run dev        # http://localhost:5173
+npm start          # http://localhost:3000
 ```
 
 ## Build & deploy
 ```
-npm run build      # outputs static site to dist/
+npm run build      # outputs static site to build/
 ```
-Upload `dist/` to any static host (Netlify drop, Vercel, GitHub Pages, Cloudflare Pages).
+Upload `build/` to any static host (Netlify drop, Vercel, GitHub Pages, Cloudflare Pages).
+`"homepage": "."` in `package.json` makes all paths relative, so the site also works
+from a sub-path such as `https://<user>.github.io/portfolio/`.
+
+## Project structure
+```
+public/
+  index.html        page template
+  profile.jpg       main photo (opening section)
+  logo.png          optional logo for the menu bar (falls back to initials)
+  projects/         project images
+  products/         commercial product images
+  tools/            tool logos (Simple Icons)
+src/
+  index.js          entry point
+  App.jsx           page sections
+  data.js           ALL text, projects, tools and annotations
+  components/       UI components
+  styles.css        theme and layout
+```
 
 ## Editing content
-All text, projects, specs and image annotations are in `src/data.js`.
+All text, projects, specs, tools and image annotations are in `src/data.js`.
 
 - Images go in `public/projects/<project>/`.
 - Annotation markers: `hotspots: [{ x, y, label, note }]` where `x`/`y` are
