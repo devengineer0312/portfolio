@@ -1,6 +1,9 @@
 import Icon from './Icons.jsx'
 import { asset } from '../asset.js'
 
+// Brand colour (and optional second colour for a two-tone gradient) as CSS vars.
+const brandVars = (t) => ({ '--brand': t.color, '--brand2': t.color2 || t.color })
+
 function ToolMark({ tool, size = 30 }) {
   if (tool.logo) {
     // Logo SVGs are single-colour; a CSS mask lets us tint them per brand.
@@ -23,7 +26,7 @@ export function HeroToolbox({ groups }) {
   const all = groups.flatMap((g) => g.items)
   const chips = (copy) =>
     all.map((t) => (
-      <li key={`${copy}-${t.name}`} className="tool-chip" style={{ '--brand': t.color }} aria-hidden={copy > 0}>
+      <li key={`${copy}-${t.name}`} className="tool-chip" style={brandVars(t)} aria-hidden={copy > 0}>
         <ToolMark tool={t} size={18} />
         <span>{t.name}</span>
       </li>
@@ -48,11 +51,11 @@ export default function Tools({ groups }) {
   return (
     <div className="tools">
       {groups.map((g) => (
-        <div key={g.group} className="tool-group">
+        <div key={g.group} className={`tool-group ${g.wide ? 'is-wide' : ''}`} style={{ '--cols': g.items.length }}>
           <h3 className="mono tool-group-title">{g.group}</h3>
           <div className="tool-grid">
             {g.items.map((t) => (
-              <div key={t.name} className="tool" style={{ '--brand': t.color }}>
+              <div key={t.name} className="tool" style={brandVars(t)}>
                 <div className="tool-mark">
                   <ToolMark tool={t} />
                 </div>

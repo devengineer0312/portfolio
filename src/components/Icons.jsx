@@ -49,6 +49,15 @@ const paths = {
       <path d="M8 12.5c.8 0 .9-2 1.8-2s.9 4 1.9 4 .9-4 1.8-4 .9 2 1.8 2" />
     </>
   ),
+  // FEA mesh on a bracket: stands in for simulation tools (Ansys).
+  fea: (
+    <>
+      <path d="M3 20.5V5.5h6v9h12v6z" />
+      <path d="M3 10.5h6M3 15.5h6M9 14.5v6M15 14.5v6" strokeOpacity=".55" />
+      <path d="M3 5.5l6 5M3 10.5l6 4M3 15.5l6 5M9 14.5l6 6M15 14.5l6 6" strokeOpacity=".55" />
+      <circle cx="21" cy="17.5" r="1" fill="currentColor" />
+    </>
+  ),
   gateway: (
     <>
       <rect x="3" y="11" width="18" height="9" rx="1.5" />

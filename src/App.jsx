@@ -39,7 +39,7 @@ function Nav() {
   return (
     <nav className={`nav ${scrolled ? 'is-scrolled' : ''}`}>
       <div className="container nav-inner">
-        <a href="#top" className="brand" onClick={() => setOpen(false)}>
+        <a href="/" className="brand" onClick={() => setOpen(false)}>
           <Logo />
           <span>{profile.shortName}</span>
         </a>
