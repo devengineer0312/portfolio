@@ -434,3 +434,53 @@ p { margin: 0; }
   .marquee-track { animation: marquee 45s linear infinite !important; }
   .hero-toolbox:hover .marquee-track { animation-play-state: paused !important; }
 }
+
+/* ── Project albums ──────────────────────────────────────── */
+.album-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 26px; }
+.album-filters { display: flex; flex-wrap: wrap; gap: 8px; }
+.album-filter { display: inline-flex; align-items: center; gap: 8px; padding: 7px 12px; border-radius: 999px; cursor: pointer;
+  font-size: 12px; letter-spacing: .04em; color: var(--muted); background: var(--surface); border: 1px solid var(--border);
+  transition: color .15s, border-color .15s, background .15s; }
+.album-filter span { font-size: 10.5px; padding: 1px 6px; border-radius: 999px; background: var(--surface-2); color: var(--muted); }
+.album-filter:hover { color: var(--text); border-color: var(--green-dim); }
+.album-filter.is-active { color: #04130c; background: var(--green); border-color: var(--green); }
+.album-filter.is-active span { background: rgba(4,19,12,.2); color: #04130c; }
+.album-count { font-size: 12px; color: var(--muted); }
+
+.album-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 26px 22px; }
+.album { display: flex; flex-direction: column; min-width: 0; position: relative; isolation: isolate; padding-top: 13px; }
+
+/* Mosaic: big cover + up to two stacked thumbs, with a "stack of prints" edge */
+.album-mosaic { position: relative; display: grid; grid-template-columns: 2fr 1fr; gap: 6px; aspect-ratio: 16 / 10;
+  padding: 6px; border-radius: 12px; background: var(--surface); border: 1px solid var(--border); }
+.album-mosaic::before, .album-mosaic::after { content: ''; position: absolute; left: 14px; right: 14px; border-radius: 12px;
+  border: 1px solid var(--border); background: var(--surface); z-index: -1; transition: transform .25s; }
+.album-mosaic::before { top: -7px; transform: scaleX(.94); opacity: .7; }
+.album-mosaic::after { top: -13px; transform: scaleX(.88); opacity: .4; }
+.album:hover .album-mosaic::before { transform: scaleX(.94) translateY(-3px); }
+.album:hover .album-mosaic::after { transform: scaleX(.88) translateY(-6px); }
+.album-mosaic:has(.album-side:empty), .album-mosaic:not(:has(.album-side)) { grid-template-columns: 1fr; }
+.album-side { display: grid; grid-template-rows: 1fr 1fr; gap: 6px; min-height: 0; }
+.album-photo { position: relative; padding: 0; border: 0; border-radius: 8px; overflow: hidden; cursor: zoom-in; background: #e9ece9; min-height: 0; }
+.album-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s, filter .3s; }
+.album-photo:hover img { transform: scale(1.06); }
+.album-photo:focus-visible { outline: 2px solid var(--copper); outline-offset: 2px; }
+.album-ann { position: absolute; right: 8px; bottom: 8px; font-size: 10px; padding: 3px 7px; border-radius: 4px;
+  background: rgba(10,15,13,.85); color: var(--green); }
+.album-more { position: absolute; inset: 0; display: grid; place-items: center; font-size: 20px; font-weight: 600;
+  color: #fff; background: rgba(10,15,13,.62); backdrop-filter: blur(1px); }
+
+.album-info { display: flex; flex-direction: column; gap: 6px; padding: 16px 4px 0; text-align: left; background: none; border: 0; cursor: pointer; }
+.album-info .eyebrow { font-size: 11px; }
+.album-info h3 { font-size: 18px; }
+.album-info .muted { font-size: 14px; }
+.album-info .chips { margin-top: 6px; }
+.album-info .chip { font-size: 12px; padding: 3px 8px; }
+.album-info .card-foot { border-top: 0; padding-top: 8px; }
+.album-info:hover h3 { color: var(--green); }
+.album-info:hover .arrow { transform: translateX(4px); }
+
+@media (max-width: 760px) {
+  .album-grid { grid-template-columns: 1fr; }
+  .album-count { width: 100%; }
+}

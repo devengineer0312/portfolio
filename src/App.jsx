@@ -2,10 +2,10 @@ import { useCallback, useEffect, useState } from 'react'
 import { profile, stats, projects, experience, education, skills, process, expertise, tools } from './data.js'
 import Tools, { HeroToolbox } from './components/Tools.jsx'
 import ProductCards from './components/ProductCards.jsx'
+import Album from './components/Album.jsx'
 import TraceBackground from './components/TraceBackground.jsx'
 import ProjectModal from './components/ProjectModal.jsx'
 import SafeImage from './components/SafeImage.jsx'
-import { asset } from './asset.js'
 
 const NAV = [
   ['about', 'About'],
@@ -205,38 +205,10 @@ function Projects({ onOpen }) {
       <div className="container">
         <SectionHead
           index="02"
-          title="Selected Projects"
-          kicker="Open a project for annotated renders, layout views, specifications and design decisions."
+          title="Project Albums"
+          kicker="Click any photo to open the album — annotated renders, layout views, specifications and design decisions."
         />
-        <div className="project-grid">
-          {projects.map((p, i) => {
-            const annotations = p.gallery.reduce((n, g) => n + (g.hotspots?.length || 0), 0)
-            return (
-              <button key={p.id} className="project-card" onClick={() => onOpen(i)}>
-                <div className="project-cover">
-                  <img src={asset(p.cover)} alt={p.title} loading="lazy" />
-                  <span className="cover-tag mono">PRJ-{String(i + 1).padStart(2, '0')}</span>
-                </div>
-                <div className="project-body">
-                  <p className="eyebrow mono">{p.category}</p>
-                  <h3>{p.title}</h3>
-                  <p className="muted">{p.subtitle}</p>
-                  <ul className="mini-specs mono">
-                    {p.specs.slice(0, 3).map(([k, v]) => (
-                      <li key={k}>
-                        <span>{k}</span>
-                        {v}
-                      </li>
-                    ))}
-                  </ul>
-                  <span className="card-foot mono">
-                    {p.gallery.length} views · {annotations} annotations <span className="arrow">→</span>
-                  </span>
-                </div>
-              </button>
-            )
-          })}
-        </div>
+        <Album projects={projects} onOpen={onOpen} />
       </div>
     </section>
   )
@@ -376,8 +348,10 @@ export default function App() {
     window.addEventListener('hashchange', onHash)
     return () => window.removeEventListener('hashchange', onHash)
   }, [])
-  const open = useCallback((i) => {
+  const [openImage, setOpenImage] = useState(0)
+  const open = useCallback((i, image = 0) => {
     window.history.replaceState(null, '', `#project-${projects[i].id}`)
+    setOpenImage(image)
     setOpenIndex(i)
   }, [])
   const close = useCallback(() => {
@@ -405,7 +379,9 @@ export default function App() {
           <span>{profile.location}</span>
         </div>
       </footer>
-      {openIndex !== null && <ProjectModal project={projects[openIndex]} index={openIndex} onClose={close} />}
+      {openIndex !== null && (
+        <ProjectModal project={projects[openIndex]} index={openIndex} startImage={openImage} onClose={close} />
+      )}
     </>
   )
 }

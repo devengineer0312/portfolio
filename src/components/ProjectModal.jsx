@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 import AnnotatedImage from './AnnotatedImage.jsx'
 import { asset } from '../asset.js'
 
-export default function ProjectModal({ project, index, onClose }) {
-  const [current, setCurrent] = useState(0)
+export default function ProjectModal({ project, index, startImage = 0, onClose }) {
+  const [current, setCurrent] = useState(startImage)
   const [annotate, setAnnotate] = useState(true)
   const image = project.gallery[current]
 
