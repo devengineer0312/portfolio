@@ -43,6 +43,7 @@ export default function Album({ projects, onOpen }) {
                 <button className="album-photo album-cover" onClick={() => onOpen(i, 0)} aria-label={`${p.title}: ${cover.caption}`}>
                   <img src={asset(cover.src)} alt="" loading="lazy" />
                   <span className="cover-tag mono">PRJ-{String(i + 1).padStart(2, '0')}</span>
+                  {p.kind && <span className="kind-tag mono">{p.kind}</span>}
                 </button>
                 {side.length > 0 && (
                   <div className="album-side">
@@ -72,6 +73,15 @@ export default function Album({ projects, onOpen }) {
                   Open album <span className="arrow">→</span>
                 </span>
               </button>
+              {p.links && (
+                <div className="album-links mono">
+                  {p.links.map((l) => (
+                    <a key={l.url} href={l.url} target="_blank" rel="noreferrer">
+                      {l.label} ↗
+                    </a>
+                  ))}
+                </div>
+              )}
             </article>
           )
         })}

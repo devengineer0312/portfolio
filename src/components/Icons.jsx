@@ -58,6 +58,45 @@ const paths = {
       <circle cx="21" cy="17.5" r="1" fill="currentColor" />
     </>
   ),
+  // System-on-module seated on a carrier board.
+  som: (
+    <>
+      <rect x="2.5" y="9" width="19" height="11" rx="1.2" />
+      <rect x="6.5" y="4" width="11" height="8" rx="1" />
+      <rect x="10" y="6" width="4" height="4" />
+      <path d="M5 17h3M10 17h2M16 15.5v3M18.5 15.5v3" />
+    </>
+  ),
+  // Data-acquisition module: sensor inputs feeding a sampled waveform.
+  daq: (
+    <>
+      <rect x="6" y="4" width="15.5" height="16" rx="1.5" />
+      <path d="M2.5 8H6M2.5 12H6M2.5 16H6" />
+      <path d="M8.5 14.5l2-4 2 6 2-8 2 5 2-2" />
+      <circle cx="18.5" cy="6.8" r=".8" fill="currentColor" />
+    </>
+  ),
+  meter: (
+    <>
+      <rect x="4" y="2.5" width="16" height="19" rx="2" />
+      <rect x="7" y="5.5" width="10" height="5" rx=".8" />
+      <path d="M9 8h1.5M12 8h1M14.5 8h1" />
+      <path d="m12.8 13-2.3 3.5h3l-2.3 3.5" />
+    </>
+  ),
+  // Datalogger with a cellular antenna and signal waves.
+  logger: (
+    <>
+      <rect x="3" y="10" width="15" height="10.5" rx="1.5" />
+      <path d="M15 10V4.5" />
+      <path d="M18 3.5c1 .9 1.5 2 1.5 3.2S19 9 18 9.9M20.2 1.8c1.5 1.3 2.3 3 2.3 4.9s-.8 3.6-2.3 4.9" />
+      <path d="M6 16.5l2-2.5 2 1.5 2-3 2.5 2" />
+    </>
+  ),
+
+
+
+
   gateway: (
     <>
       <rect x="3" y="11" width="18" height="9" rx="1.5" />

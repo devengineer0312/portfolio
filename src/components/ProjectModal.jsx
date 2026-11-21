@@ -78,6 +78,15 @@ export default function ProjectModal({ project, index, startImage = 0, onClose }
 
           <aside className="modal-info">
             <p className="lead">{project.summary}</p>
+            {project.links && (
+              <div className="modal-links">
+                {project.links.map((l, k) => (
+                  <a key={l.url} className={k === 0 ? 'btn btn-sm btn-primary' : 'btn btn-sm btn-ghost'} href={l.url} target="_blank" rel="noreferrer">
+                    {l.label} ↗
+                  </a>
+                ))}
+              </div>
+            )}
 
             <h3 className="section-label mono">{'// Specifications'}</h3>
             <table className="spec-table">

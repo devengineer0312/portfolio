@@ -17,6 +17,7 @@ export const profile = {
   photo: '/profile.jpg',
   title: 'Hardware & Embedded Systems Engineer',
   location: 'São Paulo, Brazil',
+  github: 'https://github.com/devengineer0312',
   upwork: 'https://www.upwork.com/freelancers/~014ba1cc7c87f5dbc7?mp_source=share',
   headline: 'Turning complex electronic ideas into production-ready products.',
   tagline:
@@ -229,6 +230,71 @@ export const projects = [
     ],
   },
   {
+    id: 'pet-tracker',
+    title: 'Pet Tracker — GPS & Activity Firmware + Web App',
+    subtitle: 'ESP32-C6 GPS/IMU tracker streaming live telemetry to an Angular map dashboard',
+    category: 'IoT / RF',
+    kind: 'Firmware + Web',
+    links: [
+      { label: 'Source code', url: 'https://github.com/devengineer0312/Pet-tracker' },
+      { label: 'Live demo', url: 'https://pet-tracker-production.up.railway.app/' },
+    ],
+    summary:
+      'End-to-end connected-pet tracker. An ESP32-C6 reads a NEO-6M GPS and an MPU6050 six-axis IMU, classifies the animal’s activity and adapts how often it reports. Telemetry streams over secure WebSockets to a Node.js / Express service on Railway, and an Angular + Mapbox dashboard shows live position, routes, activity and device status.',
+    specs: [
+      ['MCU', 'Espressif ESP32-C6 (Wi-Fi)'],
+      ['Positioning', 'u-blox NEO-6M GPS with patch antenna'],
+      ['Motion', 'MPU6050 accelerometer + gyroscope (I²C)'],
+      ['Link', 'Secure WebSocket (WSS) with reconnect handling'],
+      ['Backend', 'Node.js / Express on Railway'],
+      ['Frontend', 'Angular 20 + Mapbox GL JS'],
+    ],
+    highlights: [
+      'Activity recognition fuses GPS speed with IMU acceleration / rotation thresholds: lying, standing, walking, running, playing.',
+      'Adaptive reporting — 30 s when stationary, 5 s when moving, 2 s when moving fast — to save power and data.',
+      'Route recording starts and stops automatically with movement, with distance and duration summaries.',
+      'Battery, satellite count, signal quality and sensor readings reported alongside position.',
+      'Dashboard with live map, route history and light / dark themes.',
+    ],
+    tools: ['ESP32-C6', 'GPS', 'IMU', 'WebSocket', 'Node.js', 'Angular'],
+    gallery: [
+      { src: '/projects/pet-tracker/dog-collar.jpg', caption: 'Use case — GPS tracker worn on a dog collar (photo: Uusijani, CC0)' },
+      { src: '/projects/pet-tracker/pcb.jpg', caption: 'Compact tracker board — ESP32-C6, NEO-6M GPS + patch antenna, MPU6050 (concept render)' },
+      { src: '/projects/pet-tracker/map.jpg', caption: 'Live tracking dashboard — Angular + Mapbox' },
+      { src: '/projects/pet-tracker/firmware.jpg', caption: 'Firmware — activity recognition from GPS speed and IMU data' },
+    ],
+  },
+  {
+    id: 'vanguard-telemetry',
+    title: 'Vanguard Telemetry — GPS Fleet Tracking Platform',
+    subtitle: 'Real-time GPS telemetry ingestion, geofencing and live fleet map',
+    category: 'IoT / RF',
+    kind: 'Web / Cloud',
+    links: [{ label: 'Source code', url: 'https://github.com/devengineer0312/Vanguard-Telemetry-Enterprise-IoT-Fleet-Tracking' }],
+    summary:
+      'Full-stack IoT fleet-monitoring platform for GPS trackers. Devices report over MQTT or HMAC-signed webhooks; a telemetry pipeline validates each fix, a geofence engine detects enter / exit events, and positions and alerts are pushed live over Socket.io to a React command center. A built-in fleet simulator runs hundreds of moving assets for demos without hardware.',
+    specs: [
+      ['Ingestion', 'MQTT broker + HMAC-signed HTTP webhooks'],
+      ['Geofencing', 'Polygon point-in-polygon, enter / exit events'],
+      ['Real-time', 'Socket.io push to all connected clients'],
+      ['Storage', 'Redis live state, Prisma ORM database'],
+      ['Security', 'JWT authentication, role-based access, API keys, IP allow-list'],
+      ['Stack', 'TypeScript, Node.js, React'],
+    ],
+    highlights: [
+      'Modular, event-driven backend: ingestion, device registry, geofence engine, persistence and push layer are separate modules.',
+      'Per-device state turns point-in-polygon checks into clean ENTER / EXIT events.',
+      'Map-based command center to draw and edit geofences and watch the fleet live.',
+      'Repository pattern over Prisma keeps persistence independent of application logic.',
+      'Device and fleet simulators for development and demonstrations.',
+    ],
+    tools: ['TypeScript', 'Node.js', 'React', 'Redis', 'Prisma', 'Socket.io', 'MQTT'],
+    gallery: [
+      { src: '/projects/vanguard/architecture.jpg', caption: 'System architecture — from GPS tracker to live command center' },
+      { src: '/projects/vanguard/geofence-code.jpg', caption: 'Backend — geofence enter / exit detection' },
+    ],
+  },
+  {
     id: 'openeew-sensor',
     title: 'OpenEEW Earthquake Sensor',
     subtitle: 'ESP32 seismic sensor with Ethernet, Wi-Fi and precision accelerometer',
@@ -393,6 +459,35 @@ export const projects = [
     ],
   },
   {
+    id: 'eeg-headband',
+    title: 'EEG Headband Acquisition Firmware',
+    subtitle: '6-channel EEG streaming with electrode impedance testing over Bluetooth',
+    category: 'Medical / Biosignal',
+    kind: 'Firmware',
+    links: [{ label: 'Source code', url: 'https://github.com/devengineer0312/Headband_EEG_Firmware' }],
+    summary:
+      'Firmware for a wearable 6-channel EEG headband built on an ATmega1284. It configures an MCP3913 six-channel 24-bit delta-sigma analog front-end, streams samples to a host application over a Bluetooth serial link, and runs an electrode impedance test that injects a DAC signal and measures the return current to flag good, poor or disconnected leads.',
+    specs: [
+      ['MCU', 'Microchip ATmega1284'],
+      ['Analog front-end', 'MCP3913, 6-channel 24-bit ΔΣ ADC (SPI)'],
+      ['Sample rate', 'Selectable 25 – 3200 SPS'],
+      ['Impedance test', 'AD5621 DAC injection + shunt current sense'],
+      ['Link', 'Bluetooth serial (SPP) to the host app'],
+      ['Language', 'C++ (Arduino toolchain)'],
+    ],
+    highlights: [
+      'AFE set up for 24-bit conversions with dithering, programmable gain and a selectable sample rate.',
+      'Host command set: start / stop streaming, channel on / off, sample-rate change, square-wave test signal, soft reset.',
+      'Per-lead impedance classification (good / bad / unconnected) so electrode contact can be fixed before recording.',
+      'Low-power sleep with button wake-up for a battery-powered headband.',
+    ],
+    tools: ['ATmega1284', 'MCP3913', 'C++', 'Bluetooth', 'Biosignal'],
+    gallery: [
+      { src: '/projects/eeg-headband/architecture.jpg', caption: 'Firmware architecture — electrodes, AFE, MCU and Bluetooth link' },
+      { src: '/projects/eeg-headband/adc-code.jpg', caption: 'ADC driver — MCP3913 analog front-end initialisation' },
+    ],
+  },
+  {
     id: 'esp32s3-wearable',
     title: 'ESP32-S3 Wearable Audio & Haptics Device',
     subtitle: 'Four-layer wearable with I²S mic, speaker amp, vibration motor and Li-Po charging',
@@ -520,43 +615,45 @@ export const projects = [
   },
 ]
 
-// Professional work described in the resume. Shown as text case studies
-// (no images, to respect employer confidentiality).
+// Professional work. Each job shows its commercial products as cards:
+// `image` = 16:10 product image shown at the top of the card (`credit` says
+// whose photo it is, or "Illustration"); without one, `icon` is drawn. `related` = ids of portfolio albums with similar
+// work, shown as "Related portfolio work" links that open the album.
 export const experience = [
   {
     role: 'Hardware Engineer',
     company: 'TRACTIAN',
     focus: 'Industrial IoT & Predictive Maintenance',
-    // Commercial products shown at the top of this job. `image` is optional;
-    // without one, a device icon is drawn instead.
     products: [
       {
-        name: 'Smart Trac Ultra',
+        name: 'Smart Trac Ultra (Gen 2)',
         kind: 'Wireless condition-monitoring sensor',
-        image: '/products/smart-trac-ultra-installed.jpg',
-        imageFit: 'photo', // fills the tile; use 'cutout' for transparent PNG renders
+        image: '/products/smart-trac-ultra-studio.jpg',
         credit: 'Image © TRACTIAN',
         link: 'https://tractian.com/en/smart-trac-ultra',
+        pitch: 'Led hardware development and multilayer PCB optimisation of an advanced industrial condition-monitoring sensor.',
         facts: ['Vibration, temperature & RPM sensing', 'ATEX / IECEx hazardous-location certified', 'Sub-GHz link to the Smart Receiver'],
         contribution: ['−15% device size', '+20% battery life'],
+        related: ['openeew-sensor', 'ultra-mini'],
       },
       {
         name: 'Smart Receiver Pro (SR-PRO)',
         kind: 'Industrial wireless gateway',
-        icon: 'gateway',
+        image: '/products/smart-receiver-pro.jpg',
+        credit: 'Illustration',
         link: 'https://fccid.io/2BCIS-SR-PRO',
         linkLabel: 'FCC ID 2BCIS-SR-PRO',
+        pitch: 'Gateway hardware: Sub-GHz RF communication, component selection and signal-integrity validation.',
         facts: ['Sub-GHz sensor network, up to 100 sensors', '4G/LTE or Wi-Fi backhaul to the cloud', 'Three-antenna design'],
         contribution: ['50+ industrial sites', 'FCC certified'],
+        related: ['multi-radio-iot', 'esp32p4-gateway'],
       },
     ],
     location: 'São Paulo, Brazil',
     period: 'Nov 2023 — Oct 2026',
     items: [
-      { title: 'Smart Trac Ultra (Gen 2)', text: 'Led hardware development and multilayer PCB optimisation for an advanced industrial condition-monitoring sensor.', metrics: ['−15% device size', '+20% battery life'] },
-      { title: 'Smart Receiver Pro (SR-PRO)', text: 'Industrial wireless gateway hardware: Sub-GHz RF communication, component selection and signal-integrity validation for reliable data collection.', metrics: ['50+ industrial sites'] },
-      { title: 'Advanced hardware development', text: 'Complex 4/6-layer HDI PCBs in Altium Designer with BOM optimisation, supporting EMI/EMC compliance.', metrics: ['−12% BOM cost'] },
-      { title: 'Lab validation & compliance', text: 'Validation with oscilloscopes, spectrum and logic analysers; found and fixed noise issues in high-vibration environments.', metrics: ['FCC', 'CE', 'Anatel'] },
+      { title: 'Advanced hardware development', text: 'Designed complex 4/6-layer HDI PCBs in Altium Designer, reducing BOM cost and supporting FCC, CE and Anatel EMI/EMC compliance.', metrics: ['−12% BOM cost', 'FCC', 'CE', 'Anatel'] },
+      { title: 'Lab validation', text: 'Validation with oscilloscopes, spectrum and logic analysers; found and fixed noise issues in high-vibration environments.', metrics: [] },
       { title: 'Embedded test automation', text: 'STM32/ESP32 firmware in embedded C and Python-driven test rigs.', metrics: ['−30% HIL test time'] },
       { title: 'Mechanical & firmware co-design', text: 'Shielding design for an IP68 enclosure with mechanical engineering; edge-compute data paths aligned with firmware for the AI platform.', metrics: ['IP68'] },
     ],
@@ -567,12 +664,49 @@ export const experience = [
     focus: 'Embedded Systems & Industrial Electronics',
     location: 'Barroso, Brazil',
     period: 'Apr 2021 — Sep 2023',
+    products: [
+      {
+        name: 'ARM Cortex SoM & Carrier Boards',
+        kind: 'Linux edge-computing platform',
+        image: '/products/arm-som-carrier.jpg',
+        credit: 'Illustration',
+        pitch: 'Linux-enabled embedded hardware platforms for industrial edge computing and protocol conversion.',
+        facts: ['DDR memory, USB 3.0 and Ethernet', 'High-speed controlled-impedance routing', 'Modbus / MQTT / HTTP gateways'],
+        contribution: ['Embedded Linux', 'USB 3.0', 'DDR'],
+        related: ['am625-carrier', 'core3566-carrier'],
+      },
+      {
+        name: 'Industrial Data Acquisition Modules (PCD)',
+        kind: 'Industrial monitoring & data capture',
+        image: '/products/pcd-daq-module.jpg',
+        credit: 'Illustration',
+        pitch: 'High-density circuits, sensor interfaces and power subsystems for industrial monitoring.',
+        facts: ['Interfaces for a wide range of industrial sensors', 'High-density mixed-signal layout', 'Dedicated power subsystems'],
+        contribution: ['High-density design'],
+        related: ['industrial-interface', 'isolated-control'],
+      },
+      {
+        name: 'Industrial IoT Energy Meter',
+        kind: 'Connected energy metering',
+        image: '/products/iot-energy-meter.jpg',
+        credit: 'Illustration',
+        pitch: 'Optimised the analog and mixed-signal circuitry for EMI protection and measurement reliability.',
+        facts: ['Analog front-end hardening', 'EMI protection of metering circuits', 'Improved measurement reliability'],
+        contribution: ['EMI hardening'],
+        related: ['isolated-control'],
+      },
+      {
+        name: 'M2M Industrial Telemetry Dataloggers',
+        kind: 'Cellular & Wi-Fi telemetry',
+        image: '/products/m2m-datalogger.jpg',
+        credit: 'Illustration',
+        pitch: 'Integrated 4G LTE, NB-IoT and Wi-Fi and optimised the power distribution network.',
+        facts: ['4G LTE / NB-IoT / Wi-Fi RF routing', 'Redesigned power distribution network', 'Low-power sleep architecture'],
+        contribution: ['−18% sleep power'],
+        related: ['multi-radio-iot'],
+      },
+    ],
     items: [
-      { title: 'SoM architecture', text: 'Led hardware design of Linux-capable ARM Cortex Systems-on-Module and custom carrier boards for edge computing and protocol conversion (Modbus / MQTT / HTTP).', metrics: ['Embedded Linux'] },
-      { title: 'High-speed PCB design', text: 'Controlled impedance, differential pairs and length matching for USB 2.0/3.0, Ethernet and DDR.', metrics: ['USB 3.0', 'DDR', 'GbE'] },
-      { title: 'Industrial data capture', text: 'High-density circuitry and power subsystems for PCD data-capture modules interfacing a wide range of industrial sensors.', metrics: [] },
-      { title: 'IoT energy meter', text: 'Design changes to protect analog metering circuitry from EMI.', metrics: ['EMI hardening'] },
-      { title: 'M2M telemetry dataloggers', text: 'Improved 4G LTE / NB-IoT and Wi-Fi RF routing; redesigned the power distribution network.', metrics: ['−18% sleep current'] },
       { title: 'Automotive interfaces', text: 'Low-level embedded C drivers between the SoM and CAN J1939 / OBD-II peripherals.', metrics: ['CAN', 'J1939'] },
       { title: 'HIL test design', text: 'Python-automated hardware-in-the-loop testing with oscilloscopes and logic analysers.', metrics: ['−35% physical testing'] },
     ],

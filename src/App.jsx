@@ -119,6 +119,9 @@ function Hero() {
           <a className="btn btn-ghost" href="#projects">
             View projects
           </a>
+          <a className="btn btn-ghost" href={profile.github} target="_blank" rel="noreferrer">
+            GitHub ↗
+          </a>
         </div>
         <dl className="stats">
           {stats.map((s) => (
@@ -206,7 +209,7 @@ function Projects({ onOpen }) {
         <SectionHead
           index="02"
           title="Project Albums"
-          kicker="Click any photo to open the album — renders, layout views, specifications and design decisions."
+          kicker="Hardware, firmware and software — click any photo to open the album with renders, code, specifications and design decisions."
         />
         <Album projects={projects} onOpen={onOpen} />
       </div>
@@ -232,7 +235,7 @@ function Experience() {
                   {job.location}
                 </p>
               </div>
-              {job.products && <ProductCards products={job.products} />}
+              {job.products && <ProductCards products={job.products} projects={projects} />}
               <div className="job-items">
                 {job.items.map((it) => (
                   <div className="job-item" key={it.title}>
